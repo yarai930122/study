@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -26,6 +27,16 @@ public class TestApi {
     public @ResponseBody Map<String,String> testFun(){
         Map<String,String> retMap = new HashMap<>();
         retMap.put("key","value");
+        return  retMap;
+    }
+
+
+    @RequestMapping(value = "/post/data", method=RequestMethod.POST)
+    @ApiOperation(value = "测试用接口",notes = "测试用接口",httpMethod = "POST")
+    public @ResponseBody Map<String,String> testFun2(@RequestParam(value = "key") String key,
+                                                     @RequestParam(value = "value") String value){
+        Map<String,String> retMap = new HashMap<>();
+        retMap.put(key,value);
         return  retMap;
     }
 }

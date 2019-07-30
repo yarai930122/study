@@ -12,6 +12,8 @@
 <body>
     <div id="app" >
         <input type="button" value="get" @click="getInfo">
+        <input type="button" value="post" @click="postInfo">
+
     </div>
 
     <script>
@@ -22,10 +24,23 @@
             },
             methods:{
                 getInfo(){
+                    //this.$http.get('/someUrl', [config]).then(successCallback, errorCallback);
+                    //此处成功的回调函数必须存在,失败的回调可以不用;
                     this.$http.get('/test/get/data').then(function (result) {
-                        console.log(result.data);
+                        //console.log(result.data);
+                        //通过.body获得服务器返回数据
+                        console.log(result.body);
                     })
+                },
+                postInfo(){
+                    //手动发动的post请求默认没有表单格式
+                    //通过[option]设置提交数据的格式
+                    var param = {key:"111", value:"222"}
+                    this.$http.post('test/post/data',param,{ emulateJSON:true}).then(result=>{
+                        console.log(result.body);
+                    });
                 }
+
             }
         });
     </script>
