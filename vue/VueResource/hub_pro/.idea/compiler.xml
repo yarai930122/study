@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hub_pro_dao" />
+        <module name="hub_pro_domain" />
+        <module name="hub_pro_service" />
+        <module name="hub_pro_utils" />
+        <module name="hub_pro_web" />
+        <module name="hub_pro_webapi" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
