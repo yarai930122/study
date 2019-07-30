@@ -23,7 +23,7 @@
             methods:{
                 getInfo(){
                     this.$http.get('/test/get/data').then(function (result) {
-                        console.log(result);
+                        console.log(result.data);
                     })
                 }
             }

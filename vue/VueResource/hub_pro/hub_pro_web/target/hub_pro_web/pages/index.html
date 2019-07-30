@@ -12,7 +12,6 @@
 <body>
     <div id="app" >
         <input type="button" value="get" @click="getInfo">
-        <input type="button" value="post" @click="postInfo">
     </div>
 
     <script>
@@ -24,12 +23,8 @@
             methods:{
                 getInfo(){
                     this.$http.get('/test/get/data').then(function (result) {
-                        console.log(result.body);
-                        console.log(result.data.key);
+                        console.log(result);
                     })
-                },
-                postInfo(){
-                    this.$http.post().
                 }
             }
         });
