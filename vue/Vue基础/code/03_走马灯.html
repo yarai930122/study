@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+    c
+
+    <script>
+        //在vue实例中如果想要获取data中的数据或methods中的方法，必须通过this来调用；
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'八嘎变态无路赛!~',
+                intervalId:null
+            },
+            methods: {
+                show:function(){
+
+                    if(this.intervalId!=null){
+                        return;
+                    }
+
+                    //用=>代替function解决this指向的问题
+                    this.intervalId = setInterval(() =>{
+                        var startStr = this.msg.substring(0,1);
+                        var endStr = this.msg.substring(1);
+                        console.log(startStr);
+                        console.log(endStr);
+
+                        //vue会监听自己内部中数值的改变，当数据发生改变时，则自动将最新的数据同步到页面中去;
+                        this.msg = endStr + startStr; 
+                    },100);
+
+                },
+
+                stop(){
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
+                }
+            },
+        });
+
+        //分析:
+        //1. 给嗨起来按钮 绑定事件;
+        //2. 获取app中的字符串 截图第一个文字,追加到文本最后;
+        //3. 将2步骤的代码放到定时器中;
+    </script>
+</body>
+</html>

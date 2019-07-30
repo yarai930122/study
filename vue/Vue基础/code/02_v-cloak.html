@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+    
+<body>
+    <div id="app">
+        <!-- 使用v-cloak可以解决插值表达式闪烁问题 -->
+        <p v-cloak>{{ msg }}</p>
+        <!-- 插值表达式和v-text -->
+        <!-- 1.v-text会覆盖元素中原本的内容,而插值表达式则不会,仅替换插值表达式的内容 -->
+        <!-- 2.v-text不会有闪烁问题 -->
+        <h4 v-text="msg"></h4>
+
+        <!-- 插值表达式和v-text仅将内容渲染成字符串文本 -->
+        <div>{{ msg2 }}</div>
+        <div v-text="msg2"></div>
+
+        <!-- v-html则会将数据渲染成html文本 -->
+        <div v-html="msg2"></div>
+
+        <!-- v-bind 用于绑定属性的指令，也可以直接简写成: -->
+        <input type="button" value="btn" v-bind:title="myTitle">
+        <input type="button" value="btn" :title="myTitle + '123'">
+
+        <!-- vue中提供了v-on事件绑定机智 -->
+        <input type="button" value="btn" id="btnId" :title="myTitle + '321'" @click="show">
+    
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'123',
+                msg2:'<h1>hello</h1>',
+                myTitle:'测试'
+            },
+            methods:{   //methods属性中定义方法
+                show:function(){
+                    alert("hello");
+                }        
+            }
+        });
+    </script>
+</body>
+</html>

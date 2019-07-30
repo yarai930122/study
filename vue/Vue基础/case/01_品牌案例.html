@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="panel-body form-inline">
+            <label>
+                id:
+                <input type="text" class="form-control" v-model="idObj">
+            </label>
+            <label>
+                name:
+                <input type="text" class="form-control" v-model="nameObj">
+            </label>
+            <input type="button" class="btn btn-primary" value="add" @click="insertObj">
+        
+            <label>
+                search:
+                <input type="text" class="form-control" v-model="keywords">
+            </label>
+        </div>
+        <div>
+            <table class="table table-brodered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 之前v-for中的数据,都是直接从data上的list渲染过来的 -->
+                    <!-- 现在通过自定的方法筛选list,重新将筛选后的list渲染出来 -->
+                    <tr v-for="(item, index) in search(keywords)" :key="item.id">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.time }}</td>
+                        <td><a href="#" @click.prevent = "delObj(item.id)">del</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                idObj:null,
+                nameObj:null,
+                keywords:'',
+                list:[
+                    {
+                        id:1,
+                        name:'yarai',
+                        time: new Date()
+                    },
+                    {
+                        id:2,
+                        name:'mera',
+                        time: new Date()
+                    }
+                ]
+            },
+            methods: {
+                insertObj(){
+                    this.list.push({id:this.idObj, name:this.nameObj, time:new Date()});
+                    this.idObj = '';
+                    this.nameObj = '';
+                },
+                delObj(delId){
+                    //console.log(delId);
+                    this.list.some((item,i)=>{
+                        if(delId == item.id){
+                            this.list.splice(i,1);
+                            return true;
+                        }
+                    })
+                },
+                search(keywords){
+                     var tmpList = [];
+                    // this.list.forEach(item => {
+                    //     if(item.name.indexOf(keywords)!= -1){
+                    //         tmpList.push(item);
+                    //     }
+                    // });
+
+                    return this.list.filter(item=>{
+                        if(item.name.includes(keywords)){
+                            //tmpList.push(item);
+                            return item;
+                        }
+                    })
+
+                    //return tmpList;
+                }
+            },
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app" >
+        <input type="text" v-model="v1">
+        <select v-model="opt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model="v2">
+        <input type="button" value="=" @click="equ">
+        <input type="text" v-model="ret">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                v1:0,
+                v2:0,
+                ret:0,
+                opt:'+'
+            },
+            methods: {
+                equ(){
+                    /*
+                    switch(this.opt){
+                        case "+":
+                          this.ret = Number(this.v1)+Number(this.v2);
+                        break;   
+                        
+                        case "-":
+                          this.ret = Number(this.v1)-Number(this.v2);
+                        break;   
+
+                        case "*":
+                          this.ret = Number(this.v1)*Number(this.v2);
+                        break;   
+
+                        case "/":
+                          this.ret = Number(this.v1)/Number(this.v2);
+                        break;   
+                    }*/
+
+                    this.ret = eval('Number(this.v1)' +this.opt + 'Number(this.v2)');
+                }
+            },
+        });
+    </script>
+</body>
+</html>

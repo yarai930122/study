@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app" v-cloak>
+        <!-- 对象无序键值对几何，key值中如果存在'-'则该key值需要添加‘’-->
+        <h1 :style="{color:'red', 'font-weight':'200'}">h1111111</h1>
+        <h1 :style="styleObj">h1111111</h1>
+        <!-- 使用数组绑定多对象 -->
+        <h1 :style="[styleObj,styleObj2]">h1111111</h1>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                styleObj:{color:'red', 'font-weight':'200'},
+                styleObj2:{'font-style':'italic'}
+            },
+            methods: {
+            },
+        });
+    </script>
+</body>
+</html>

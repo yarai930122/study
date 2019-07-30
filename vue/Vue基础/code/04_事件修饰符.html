@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .inner{
+            height: 150px;
+            background-color: blue;
+        }
+        .outer{
+            padding: 30px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="app">
+        <!-- .stop使用示例 -->
+        <!-- <div class="inner" @click="divHandler">
+            <input type="button" value="click" @click.stop="btnHandler">
+        </div> -->
+
+        <!-- .prevent使用示例 -->
+        <!-- <a href="http://www.baidu.com" @click.prevent="linkHandler">baidu</a> -->
+    
+        <!-- .capture使用示例 -->
+        <!-- 当使用捕获事件时，默认的冒泡记住，从里向外触发被更改为从外向内触发 -->
+        <!-- <div class="inner" @click.capture="divHandler">
+                <input type="button" value="click" @click="btnHandler">
+        </div> -->
+
+        <!-- .self使用示例 -->
+        <!-- 只有当点击自身时才触发该事件 -->
+        <!-- <div class="inner" @click.self="divHandler">
+            <input type="button" value="click" @click="btnHandler">
+        </div> -->
+
+        <!-- .once使用示例 -->
+        <!-- 仅触发一次 -->
+        <!-- ps事件修饰符可以串联 -->
+        <!-- <div class="inner" @click.self="divHandler">
+            <input type="button" value="click" @click.once.stop="btnHandler">
+        </div> -->
+
+        <!-- .stop和.self区别 -->
+        <!-- <div class="outer" @click="outerDivHandler">
+            <div class="inner" @click="divHandler">
+                <input type="button" value="click" @click.stop="btnHandler">
+            </div>
+        </div> -->
+
+        <div class="outer" @click="outerDivHandler">
+            <div class="inner" @click.self="divHandler">
+                <input type="button" value="click" @click="btnHandler">
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods: {
+                //当没有使用.stop修饰符的时候,点击buttn按钮后会向外冒泡
+                //此时会打印出btnHandler和divHandler;
+                //当使用了.stop时,则阻止了向外冒泡;仅触发button自身绑定的事件
+                divHandler(){
+                    console.log("divHandler");
+                },
+
+                btnHandler(){
+                    console.log("btnHandler");
+                },
+
+                //当使用.prevent修饰符后，阻止了<a>自带的链接跳转功能；
+                linkHandler(){
+                    console.log("btnHandler");
+                },
+
+                outerDivHandler(){
+                    console.log("outerDivHandler");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

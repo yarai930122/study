@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3 id="h3Id">{{ msg }}</h3>
+        <input type="text" v-model="testData">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'ok',
+                testData:''
+            },
+            methods: {
+                show(){
+                    console.log('执行show方法');
+                }
+            },
+            //这是第一个生命周期函数,表示实例完全被创建出来之前会执行;
+            beforeCreate() {
+                //在beforeCreate生命周期函数执行的时候,data和methods中的数据都未被初始化
+                //console.log(this.msg);
+                //this.show();
+            },
+            //这是第二个生命周期函数,
+            created() {
+                //在created生命周期函数执行的时候，data和methods已经被初始化完毕
+                console.log(this.msg);
+                this.show();
+            },
+            //第三个生命周期,表示模板已经在内存中编译完成,尚未渲染到页面中;
+            beforeMount() {
+                //在beforeMount执行中的时候，页面中的元素尚未被替换
+                var v = document.getElementById('h3Id').innerText;
+                console.log(v);
+            },
+            //第四个生命周期函数,表示内存中的模板已经渲染到页面中
+            mounted() {
+                //在beforeMount执行中的时候，页面中的元素尚未被替换
+                //mounted是实例创建期间的最后一个生命周期函数
+                var v = document.getElementById('h3Id').innerText;
+                console.log(v);
+            },
+
+            //运行阶段的两个生命周期函数,这两个生命周期函数会随着数据的改变触发0次或者多次
+            beforeUpdate() {
+                //当执行beforeUpdate函数时,页面中显示的数据依旧是旧数据,此时data数据是新的,页面尚未和最新数据保持同步;
+                console.log("beforeUpdate");
+            },
+            updated() {
+                //当updated函数执行的时候,data和页面已经保持同步;
+            },
+            //////////////////////////////////////////
+            //当执行beforeDestroy函数的时候,就已经从运行阶段进入到销毁阶段,实例中所有的data和methods,过滤器和指令等都处于可用状态;
+            //此时尚未执行真正的销毁过程;
+            //当执行到destroyed函数的时候,此时组件中所有的数据方法指令都被完全销毁,不可用;
+        });
+    </script>
+</body>
+</html>
